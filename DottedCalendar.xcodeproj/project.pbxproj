@@ -1,0 +1,19 @@
+// This is a reference project configuration
+// Use Xcode to create the actual project, then reference this structure
+
+PROJECT_CONFIGURATION: DottedCalendar
+TARGETS:
+  - DottedCalendar (iOS App)
+  - DottedCalendarWidget (Widget Extension)
+
+MINIMUM_DEPLOYMENT_TARGET: 14.0
+SWIFT_VERSION: 5.9
+
+FRAMEWORKS:
+  - SwiftUI
+  - WidgetKit
+  - UserNotifications
+  - CoreData
+
+PACKAGES:
+  - None (Standard library only for production)

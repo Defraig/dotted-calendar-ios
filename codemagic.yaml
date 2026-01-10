@@ -6,6 +6,14 @@ workflows:
     environment:
       xcode: latest
     scripts:
+      - name: Install XcodeGen
+        script: |
+          brew install xcodegen
+
+      - name: Generate Xcode project from YAML
+        script: |
+          xcodegen generate
+
       - name: Build iOS app (simulator, no signing)
         script: |
           xcodebuild -scheme DottedCalendar \

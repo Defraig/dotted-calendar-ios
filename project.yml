@@ -1,30 +1,44 @@
 name: DottedCalendar
 options:
-  bundleIdPrefix: com.defraig
+  bundleIdPrefix: com.dottedcalendar
   deploymentTarget:
     iOS: "14.0"
+  useNewBuildSystem: true
 settings:
   base:
-    SWIFT_VERSION: 5.0
-    PRODUCT_BUNDLE_IDENTIFIER: com.defraig.dottedcalendar
+    SWIFT_VERSION: "5.9"
+    PRODUCT_BUNDLE_IDENTIFIER: com.dottedcalendar
     DEVELOPMENT_TEAM: ""
     CODE_SIGN_STYLE: Automatic
-    TARGETED_DEVICE_FAMILY: 1,2
+    TARGETED_DEVICE_FAMILY: "1,2"
     CURRENT_PROJECT_VERSION: 1
     MARKETING_VERSION: 1.0.0
+    IPHONEOS_DEPLOYMENT_TARGET: "14.0"
 
 targets:
   DottedCalendar:
     type: application
     platform: iOS
+    deploymentTarget: "14.0"
     sources:
       - path: DottedCalendar
+        excludes:
+          - Info.plist
     settings:
       base:
         INFOPLIST_FILE: DottedCalendar/Info.plist
         ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
-    scheme:
-      testTargets: []
 
-fileGroups:
-  - DottedCalendar
+schemes:
+  DottedCalendar:
+    build:
+      targets:
+        DottedCalendar: all
+    run:
+      config: Debug
+    profile:
+      config: Release
+    analyze:
+      config: Debug
+    archive:
+      config: Release

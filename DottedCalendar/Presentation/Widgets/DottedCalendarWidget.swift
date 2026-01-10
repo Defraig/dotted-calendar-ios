@@ -62,7 +62,7 @@ struct DottedCalendarWidgetProvider: TimelineProvider {
         )
         
         // Schedule next update at midnight
-        var calendar = Calendar.current
+        let calendar = Calendar.current
         let tomorrow = calendar.date(byAdding: .day, value: 1, to: Date()) ?? Date()
         let nextMidnight = calendar.startOfDay(for: tomorrow)
         
@@ -182,19 +182,4 @@ struct DottedCalendarWidget: Widget {
         .description("See your current month's daily progress")
         .supportedFamilies([.systemSmall, .systemMedium])
     }
-}
-
-// MARK: - Preview
-
-#Preview(as: .systemSmall) {
-    DottedCalendarWidget()
-} timeline: {
-    let months = CalendarService.shared.generateYear()
-    let currentMonth = months.first
-    let entry = DottedCalendarWidgetEntry(
-        date: Date(),
-        months: months,
-        currentMonth: currentMonth
-    )
-    DottedCalendarWidgetEntry(date: Date(), months: months, currentMonth: currentMonth)
 }

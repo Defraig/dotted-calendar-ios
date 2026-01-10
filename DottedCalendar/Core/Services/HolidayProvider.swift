@@ -81,14 +81,51 @@ class HolidayProvider {
         var dateComponents = DateComponents()
         dateComponents.year = year
         dateComponents.month = month
-        dateComponents.day = 1
         
-        guard let monthStart = calendar.date(from: dateComponents) else {
-            return nil
+        // Handle negative week (counting from end of month)
+        if week < 0 {
+            // Get last day of month
+            dateComponents.month = month == 12 ? 1 : month + 1
+            dateComponents.day = 0
+            guard let lastDayOfMonth = calendar.date(from: dateComponents) else {
+                return nil
+            }
+            
+            let lastDay = calendar.component(.day, from: lastDayOfMonth)
+            
+            // Find the nth weekday from the end
+            for day in stride(from: lastDay, through: 1, by: -1) {
+                dateComponents.month = month
+                dateComponents.day = day
+                guard let date = calendar.date(from: dateComponents) else { continue }
+                
+                if calendar.component(.weekday, from: date) == weekday {
+                    return day
+                }
+            }
+        } else {
+            // Find nth occurrence from start of month
+            dateComponents.day = 1
+            guard let firstDay = calendar.date(from: dateComponents) else {
+                return nil
+            }
+            
+            let daysInMonth = calendar.range(of: .day, in: .month, for: firstDay)?.count ?? 0
+            var occurrenceCount = 0
+            
+            for day in 1...daysInMonth {
+                dateComponents.day = day
+                guard let date = calendar.date(from: dateComponents) else { continue }
+                
+                if calendar.component(.weekday, from: date) == weekday {
+                    occurrenceCount += 1
+                    if occurrenceCount == week {
+                        return day
+                    }
+                }
+            }
         }
         
-        // Logic for finding nth occurrence or last occurrence of a weekday
-        // This is simplified; for production, use a more robust approach
-        return nil // Placeholder
+        return nil
     }
 }

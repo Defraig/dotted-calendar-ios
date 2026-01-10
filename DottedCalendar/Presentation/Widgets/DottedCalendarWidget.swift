@@ -160,11 +160,17 @@ struct DottedCalendarWidget: Widget {
             kind: kind,
             provider: DottedCalendarWidgetProvider()
         ) { entry in
-            DottedCalendarWidgetView(entry: entry)
-                .containerBackground(
-                    CalendarDesignSystem.primaryBackground,
-                    for: .widget
-                )
+            if #available(iOS 17.0, *) {
+                DottedCalendarWidgetView(entry: entry)
+                    .containerBackground(
+                        CalendarDesignSystem.primaryBackground,
+                        for: .widget
+                    )
+            } else {
+                DottedCalendarWidgetView(entry: entry)
+                    .padding()
+                    .background(CalendarDesignSystem.primaryBackground)
+            }
         }
         .configurationDisplayName("Calendar")
         .description("See your current month's daily progress")

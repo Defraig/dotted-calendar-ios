@@ -1,6 +1,5 @@
 import SwiftUI
 
-@main
 struct DottedCalendarApp: App {
     @StateObject private var appCoordinator = AppCoordinator()
     

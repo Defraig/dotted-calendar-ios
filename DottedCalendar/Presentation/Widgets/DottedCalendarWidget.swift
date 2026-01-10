@@ -16,8 +16,10 @@ struct DottedCalendarWidgetProvider: TimelineProvider {
     
     func placeholder(in context: Context) -> DottedCalendarWidgetEntry {
         let months = calendarService.generateYear()
+        let now = Date()
         let currentMonth = months.first {
-            Calendar.current.isDateInThisMonth($0.date)
+            Calendar.current.dateComponents([.month, .year], from: $0.date) ==
+            Calendar.current.dateComponents([.month, .year], from: now)
         }
         return DottedCalendarWidgetEntry(
             date: Date(),
@@ -28,8 +30,10 @@ struct DottedCalendarWidgetProvider: TimelineProvider {
     
     func getSnapshot(in context: Context, completion: @escaping (DottedCalendarWidgetEntry) -> Void) {
         let months = calendarService.generateYear()
+        let now = Date()
         let currentMonth = months.first {
-            Calendar.current.isDateInThisMonth($0.date)
+            Calendar.current.dateComponents([.month, .year], from: $0.date) ==
+            Calendar.current.dateComponents([.month, .year], from: now)
         }
         let entry = DottedCalendarWidgetEntry(
             date: Date(),
@@ -41,8 +45,10 @@ struct DottedCalendarWidgetProvider: TimelineProvider {
     
     func getTimeline(in context: Context, completion: @escaping (Timeline<DottedCalendarWidgetEntry>) -> Void) {
         let months = calendarService.generateYear()
+        let now = Date()
         let currentMonth = months.first {
-            Calendar.current.isDateInThisMonth($0.date)
+            Calendar.current.dateComponents([.month, .year], from: $0.date) ==
+            Calendar.current.dateComponents([.month, .year], from: now)
         }
         
         // Create entry for today

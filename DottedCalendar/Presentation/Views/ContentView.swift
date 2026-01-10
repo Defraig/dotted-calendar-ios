@@ -18,7 +18,7 @@ struct ContentView: View {
                             .font(CalendarDesignSystem.monthHeaderFont)
                             .foregroundColor(CalendarDesignSystem.textPrimary)
                         
-                        Text(Text(verbatim: "Tracking your daily progress"))
+                        Text("Tracking your daily progress")
                             .font(CalendarDesignSystem.metadataFont)
                             .foregroundColor(CalendarDesignSystem.textSecondary)
                     }
